@@ -1,0 +1,28 @@
+type Permiso {
+    id: ID!
+    nombre: String!
+}
+
+type Rol {
+    id: ID!
+    nombre: String!
+    permisos: [Permiso!]!
+}
+
+type Usuario {
+    id: ID!
+    username: String!
+    roles: [Rol!]!
+}
+
+type Query {
+    usuarios: [Usuario!]!
+    roles: [Rol!]!
+    permisos: [Permiso!]!
+}
+
+type Mutation {
+    crearUsuario(username: String!, password: String!, roles: [String!]!): Usuario
+    crearRol(nombre: String!, permisos: [String!]!): Rol
+    crearPermiso(nombre: String!): Permiso
+}
