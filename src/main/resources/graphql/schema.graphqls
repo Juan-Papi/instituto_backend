@@ -19,10 +19,17 @@ type Query {
     usuarios: [Usuario!]!
     roles: [Rol!]!
     permisos: [Permiso!]!
+    checkAuthStatus: Usuario
+}
+
+type AuthData {
+    token: String!
+    user: Usuario!
 }
 
 type Mutation {
     crearUsuario(username: String!, password: String!, roles: [String!]!): Usuario
     crearRol(nombre: String!, permisos: [String!]!): Rol
     crearPermiso(nombre: String!): Permiso
+    login(username: String!, password: String!): AuthData
 }
