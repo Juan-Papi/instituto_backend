@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Document(collection = "cursos")
 public class Curso {
@@ -12,8 +12,8 @@ public class Curso {
     public String id;
     public String nombre;
     public String descripcion;
-    public Date fechaInicio;
-    public Date fechaFinal;
+    public LocalDate fechaInicio;
+    public LocalDate fechaFinal;
     public float precio;
 
     @DBRef

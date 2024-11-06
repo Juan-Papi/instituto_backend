@@ -3,16 +3,16 @@ package com.uagrm.instituto_backend.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "asistencias")
 public class Asistencia {
     @Id
     public String id;
-    public Date fecha;
-    public Date horaInicio;
-    public Date horaFinal;
+    public LocalDate fecha;
+    public LocalDateTime horaInicio;
+    public LocalDateTime horaFinal;
 
     @DBRef
     public Usuario docente;

@@ -7,6 +7,8 @@ import com.uagrm.instituto_backend.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,12 +21,12 @@ public class CalificacionCursoService {
     @Autowired
     private CursoRepository cursoRepository;
 
-    public CalificacionCurso crearCalificacionCurso(Date fecha, Date hora, String cursoId) {
+    public CalificacionCurso crearCalificacionCurso(String fecha, String hora, String cursoId) {
         Curso curso = cursoRepository.findById(cursoId).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
 
         CalificacionCurso calificacionCurso = new CalificacionCurso();
-        calificacionCurso.fecha = fecha;
-        calificacionCurso.hora = hora;
+        calificacionCurso.fecha = LocalDate.parse(fecha);
+        calificacionCurso.hora = LocalDateTime.parse(hora);
         calificacionCurso.curso = curso;
 
         return calificacionCursoRepository.save(calificacionCurso);

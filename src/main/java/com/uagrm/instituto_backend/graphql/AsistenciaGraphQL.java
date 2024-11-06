@@ -18,7 +18,7 @@ public class AsistenciaGraphQL {
     private AsistenciaService asistenciaService;
 
     @MutationMapping
-    public Asistencia crearAsistencia(@Argument Date fecha, @Argument Date horaInicio, @Argument Date horaFinal, @Argument String docenteId, @Argument String cursoHorarioId) {
+    public Asistencia crearAsistencia(@Argument String fecha, @Argument String horaInicio, @Argument String horaFinal, @Argument String docenteId, @Argument String cursoHorarioId) {
         return asistenciaService.crearAsistencia(fecha, horaInicio, horaFinal, docenteId, cursoHorarioId);
     }
 

@@ -4,14 +4,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "calificacion_curso")
 public class CalificacionCurso {
     @Id
     public String id;
-    public Date fecha;
-    public Date hora;
+    public LocalDate fecha;
+    public LocalDateTime hora;
 
     @DBRef
     public Curso curso;

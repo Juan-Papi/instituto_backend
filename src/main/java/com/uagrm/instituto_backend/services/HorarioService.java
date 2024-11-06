@@ -5,6 +5,7 @@ import com.uagrm.instituto_backend.repositories.HorarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,11 +15,11 @@ public class HorarioService {
     @Autowired
     private HorarioRepository horarioRepository;
 
-    public Horario crearHorario(String dia, Date horaInicio, Date horaFinal) {
+    public Horario crearHorario(String dia, String horaInicio, String horaFinal) {
         Horario horario = new Horario();
         horario.dia = dia;
-        horario.horaInicio = horaInicio;
-        horario.horaFinal = horaFinal;
+        horario.horaInicio = LocalDateTime.parse(horaInicio);
+        horario.horaFinal = LocalDateTime.parse(horaFinal);
         return horarioRepository.save(horario);
     }
 

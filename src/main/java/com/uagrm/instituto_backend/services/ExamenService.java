@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,14 +26,14 @@ public class ExamenService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Examen crearExamen(String tema, String descripcion, Date fecha, int ponderacion, String cursoId, String profesorId) {
+    public Examen crearExamen(String tema, String descripcion, String fecha, int ponderacion, String cursoId, String profesorId) {
         Curso curso = cursoRepository.findById(cursoId).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
         Usuario profesor = usuarioRepository.findById(new ObjectId(profesorId)).orElseThrow(() -> new RuntimeException("Profesor no encontrado"));
 
         Examen examen = new Examen();
         examen.tema = tema;
         examen.descripcion = descripcion;
-        examen.fecha = fecha;
+        examen.fecha = LocalDate.parse(fecha);
         examen.ponderacion = ponderacion;
         examen.curso = curso;
         examen.profesor = profesor;

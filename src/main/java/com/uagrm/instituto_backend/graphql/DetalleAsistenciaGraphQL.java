@@ -18,7 +18,7 @@ public class DetalleAsistenciaGraphQL {
     private DetalleAsistenciaService detalleAsistenciaService;
 
     @MutationMapping
-    public DetalleAsistencia crearDetalleAsistencia(@Argument Date hora, @Argument String estudianteId, @Argument String asistenciaId) {
+    public DetalleAsistencia crearDetalleAsistencia(@Argument String hora, @Argument String estudianteId, @Argument String asistenciaId) {
         return detalleAsistenciaService.crearDetalleAsistencia(hora, estudianteId, asistenciaId);
     }
 

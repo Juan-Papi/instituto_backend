@@ -18,7 +18,7 @@ public class ExamenGraphQL {
     private ExamenService examenService;
 
     @MutationMapping
-    public Examen crearExamen(@Argument String tema, @Argument String descripcion, @Argument Date fecha, @Argument int ponderacion, @Argument String cursoId, @Argument String profesorId) {
+    public Examen crearExamen(@Argument String tema, @Argument String descripcion, @Argument String fecha, @Argument int ponderacion, @Argument String cursoId, @Argument String profesorId) {
         return examenService.crearExamen(tema, descripcion, fecha, ponderacion, cursoId, profesorId);
     }
 

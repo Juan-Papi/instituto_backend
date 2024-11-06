@@ -18,7 +18,7 @@ public class CalificacionCursoGraphQL {
     private CalificacionCursoService calificacionCursoService;
 
     @MutationMapping
-    public CalificacionCurso crearCalificacionCurso(@Argument Date fecha, @Argument Date hora, @Argument String cursoId) {
+    public CalificacionCurso crearCalificacionCurso(@Argument String fecha, @Argument String hora, @Argument String cursoId) {
         return calificacionCursoService.crearCalificacionCurso(fecha, hora, cursoId);
     }
 

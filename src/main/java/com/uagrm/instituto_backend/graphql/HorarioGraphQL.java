@@ -18,7 +18,7 @@ public class HorarioGraphQL {
     private HorarioService horarioService;
 
     @MutationMapping
-    public Horario crearHorario(@Argument String dia, @Argument Date horaInicio, @Argument Date horaFinal) {
+    public Horario crearHorario(@Argument String dia, @Argument String horaInicio, @Argument String horaFinal) {
         return horarioService.crearHorario(dia, horaInicio, horaFinal);
     }
 

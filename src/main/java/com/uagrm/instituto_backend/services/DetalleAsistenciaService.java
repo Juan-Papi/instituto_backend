@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +26,12 @@ public class DetalleAsistenciaService {
     @Autowired
     private AsistenciaRepository asistenciaRepository;
 
-    public DetalleAsistencia crearDetalleAsistencia(Date hora, String estudianteId, String asistenciaId) {
+    public DetalleAsistencia crearDetalleAsistencia(String hora, String estudianteId, String asistenciaId) {
         Usuario estudiante = usuarioRepository.findById(new ObjectId(estudianteId)).orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
         Asistencia asistencia = asistenciaRepository.findById(asistenciaId).orElseThrow(() -> new RuntimeException("Asistencia no encontrada"));
 
         DetalleAsistencia detalle = new DetalleAsistencia();
-        detalle.hora = hora;
+        detalle.hora = LocalDateTime.parse(hora);
         detalle.estudiante = estudiante;
         detalle.asistencia = asistencia;
 

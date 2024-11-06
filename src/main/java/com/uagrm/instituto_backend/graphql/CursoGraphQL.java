@@ -18,7 +18,7 @@ public class CursoGraphQL {
     private CursoService cursoService;
 
     @MutationMapping
-    public Curso crearCurso(@Argument String nombre, @Argument String descripcion, @Argument Date fechaInicio, @Argument Date fechaFinal, @Argument float precio, @Argument String profesorId) {
+    public Curso crearCurso(@Argument String nombre, @Argument String descripcion, @Argument String fechaInicio, @Argument String fechaFinal, @Argument float precio, @Argument String profesorId) {
         return cursoService.crearCurso(nombre, descripcion, fechaInicio, fechaFinal, precio, profesorId);
     }
 
