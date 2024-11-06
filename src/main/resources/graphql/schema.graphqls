@@ -20,6 +20,28 @@ type Query {
     roles: [Rol!]!
     permisos: [Permiso!]!
     checkAuthStatus: Usuario
+    boletasInscripcion: [BoletaInscripcion!]!
+    boletaInscripcionPorId(id: ID!): BoletaInscripcion
+    cursos: [Curso!]!
+    cursoPorId(id: ID!): Curso
+    detallesInscripcion: [DetalleInscripcion!]!
+    detalleInscripcionPorId(id: ID!): DetalleInscripcion
+    horarios: [Horario!]!
+    horarioPorId(id: ID!): Horario
+    cursoHorarios: [CursoHorario!]!
+    cursoHorarioPorId(id: ID!): CursoHorario
+    asistencias: [Asistencia!]!
+    asistenciaPorId(id: ID!): Asistencia
+    detallesAsistencia: [DetalleAsistencia!]!
+    detalleAsistenciaPorId(id: ID!): DetalleAsistencia
+    calificacionesCurso: [CalificacionCurso!]!
+    calificacionCursoPorId(id: ID!): CalificacionCurso
+    detallesCalificacion: [DetalleCalificacion!]!
+    detalleCalificacionPorId(id: ID!): DetalleCalificacion
+    examenes: [Examen!]!
+    examenPorId(id: ID!): Examen
+    calificaciones: [Calificacion!]!
+    calificacionPorId(id: ID!): Calificacion
 }
 
 type AuthData {
@@ -27,9 +49,105 @@ type AuthData {
     user: Usuario!
 }
 
+type BoletaInscripcion {
+    id: ID!
+    fecha: String!
+    montoTotal: Float!
+    administrador: Usuario!
+    estudiante: Usuario!
+}
+
+type Curso {
+    id: ID!
+    nombre: String!
+    descripcion: String!
+    fechaInicio: String!
+    fechaFinal: String!
+    precio: Float!
+    profesor: Usuario!
+}
+
+type DetalleInscripcion {
+    id: ID!
+    boletaInscripcion: BoletaInscripcion!
+    curso: Curso!
+}
+
+type Horario {
+    id: ID!
+    dia: String!
+    horaInicio: String!
+    horaFinal: String!
+}
+
+type CursoHorario {
+    id: ID!
+    curso: Curso!
+    horario: Horario!
+}
+
+type Asistencia {
+    id: ID!
+    fecha: String!
+    horaInicio: String!
+    horaFinal: String!
+    docente: Usuario!
+    cursoHorario: CursoHorario!
+}
+
+type DetalleAsistencia {
+    id: ID!
+    hora: String!
+    estudiante: Usuario!
+    asistencia: Asistencia!
+}
+
+type CalificacionCurso {
+    id: ID!
+    fecha: String!
+    hora: String!
+    curso: Curso!
+}
+
+type DetalleCalificacion {
+    id: ID!
+    calificacion: Float!
+    calificacionCurso: CalificacionCurso!
+    estudiante: Usuario!
+}
+
+type Examen {
+    id: ID!
+    tema: String!
+    descripcion: String!
+    fecha: String!
+    ponderacion: Int!
+    curso: Curso!
+    profesor: Usuario!
+}
+
+type Calificacion {
+    id: ID!
+    nota: Int!
+    estudiante: Usuario!
+    examen: Examen!
+}
+
+
 type Mutation {
     crearUsuario(username: String!, password: String!, roles: [String!]!): Usuario
     crearRol(nombre: String!, permisos: [String!]!): Rol
     crearPermiso(nombre: String!): Permiso
     login(username: String!, password: String!): AuthData
+    crearBoletaInscripcion(fecha: String!, montoTotal: Float!, administradorId: ID!, estudianteId: ID!): BoletaInscripcion
+    crearCurso(nombre: String!, descripcion: String!, fechaInicio: String!, fechaFinal: String!, precio: Float!, profesorId: ID!): Curso
+    crearDetalleInscripcion(boletaInscripcionId: ID!, cursoId: ID!): DetalleInscripcion
+    crearHorario(dia: String!, horaInicio: String!, horaFinal: String!): Horario
+    crearCursoHorario(cursoId: ID!, horarioId: ID!): CursoHorario
+    crearAsistencia(fecha: String!, horaInicio: String!, horaFinal: String!, docenteId: ID!, cursoHorarioId: ID!): Asistencia
+    crearDetalleAsistencia(hora: String!, estudianteId: ID!, asistenciaId: ID!): DetalleAsistencia
+    crearCalificacionCurso(fecha: String!, hora: String!, cursoId: ID!): CalificacionCurso
+    crearDetalleCalificacion(calificacion: Float!, calificacionCursoId: ID!, estudianteId: ID!): DetalleCalificacion
+    crearExamen(tema: String!, descripcion: String!, fecha: String!, ponderacion: Int!, cursoId: ID!, profesorId: ID!): Examen
+    crearCalificacion(nota: Int!, estudianteId: ID!, examenId: ID!): Calificacion
 }
