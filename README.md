@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://spring.io/" target="blank"><img src="https://spring.io/images/OG-Spring.png" width="200" alt="Spring Logo" /></a>
+  <a href="https://spring.io/" target="blank"><img src="https://docs.spring.io/spring-boot/_/img/spring-logo.svg" width="200" alt="Spring Logo" /></a>
 </p>
 
 # PROYECTO API
