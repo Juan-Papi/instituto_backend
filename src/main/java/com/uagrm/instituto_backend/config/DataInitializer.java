@@ -47,7 +47,25 @@ public class DataInitializer implements CommandLineRunner {
         Permiso permisoCrearPermisos = new Permiso();
         permisoCrearPermisos.nombre = "CREATE_PERMISSIONS";
 
-        permisoRepository.saveAll(Arrays.asList(permisoLeerUsuarios, permisoCrearUsuarios, permisoCrearRoles, permisoCrearPermisos));
+        Permiso permisoCrearInscripcion = new Permiso();
+        permisoCrearInscripcion.nombre = "CREATE_INSCRIPCIONS";
+
+        Permiso permisoLeerAsistencias = new Permiso();
+        permisoLeerAsistencias.nombre = "READ_ASISTENCIAS";
+
+        Permiso permisoMarcarAsistencias = new Permiso();
+        permisoMarcarAsistencias.nombre = "MARCAR_ASISTENCIAS";
+
+        Permiso permisoCrearExamenes = new Permiso();
+        permisoCrearExamenes.nombre = "CREAR_EXAMENES";
+
+        Permiso permisoLeerExamenes = new Permiso();
+        permisoLeerExamenes.nombre = "LEER_EXAMENES";
+
+        Permiso permisoCrearPeriodoAsistencia = new Permiso();
+        permisoCrearPeriodoAsistencia.nombre = "CREATE_ASISTENCIAS";
+
+        permisoRepository.saveAll(Arrays.asList(permisoLeerUsuarios, permisoCrearUsuarios, permisoCrearRoles, permisoCrearPermisos, permisoCrearInscripcion, permisoLeerAsistencias, permisoLeerExamenes, permisoMarcarAsistencias, permisoCrearPeriodoAsistencia, permisoCrearExamenes));
 
         // Crear rol ADMIN con permisos
         Rol rolAdmin = new Rol();
@@ -55,11 +73,38 @@ public class DataInitializer implements CommandLineRunner {
         rolAdmin.permisos = (new HashSet<>(Arrays.asList(permisoLeerUsuarios, permisoCrearUsuarios, permisoCrearRoles, permisoCrearPermisos)));
         rolRepository.save(rolAdmin);
 
+        // Crear rol PROFESOR con permisos
+        Rol rolProfesor = new Rol();
+        rolProfesor.nombre = "PROFESOR";
+        rolProfesor.permisos = (new HashSet<>(Arrays.asList(permisoCrearExamenes, permisoLeerExamenes,permisoCrearPeriodoAsistencia)));
+        rolRepository.save(rolProfesor);
+
+        // Crear rol ESTUDIANTE con permisos
+        Rol rolEstudiante = new Rol();
+        rolEstudiante.nombre = "ESTUDIANTE";
+        rolEstudiante.permisos = (new HashSet<>(Arrays.asList(permisoMarcarAsistencias, permisoLeerAsistencias, permisoLeerExamenes)));
+        rolRepository.save(rolEstudiante);
+
+
         // Crear usuario administrador
         Usuario admin = new Usuario();
-        admin.username = "admin";
+        admin.username = "admin@gmail.com";
         admin.password = (passwordEncoder.encode("admin")); // Hashear la contraseña
         admin.roles = (new HashSet<>(Collections.singletonList(rolAdmin)));
         usuarioRepository.save(admin);
+
+        // Crear usuario profesor
+        Usuario profesor = new Usuario();
+        profesor.username = "profesor@gmail.com";
+        profesor.password = (passwordEncoder.encode("profesor")); // Hashear la contraseña
+        profesor.roles = (new HashSet<>(Collections.singletonList(rolProfesor)));
+        usuarioRepository.save(profesor);
+
+        // Crear usuario administrador
+        Usuario estudiante = new Usuario();
+        estudiante.username = "estudiante@gmail.com";
+        estudiante.password = (passwordEncoder.encode("estudiante")); // Hashear la contraseña
+        estudiante.roles = (new HashSet<>(Collections.singletonList(rolEstudiante)));
+        usuarioRepository.save(estudiante);
     }
 }

@@ -38,13 +38,18 @@ public class AuthGraphQL {
     }
 
     @QueryMapping
-    public Usuario checkAuthStatus() {
+    public AuthData checkAuthStatus() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
+        if (authentication != null && authentication.isAuthenticated()
+                && !(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
-            return usuarioService.obtenerPorUsername(username);
+            Usuario usuario = usuarioService.obtenerPorUsername(username);
+
+            // Generar un nuevo token para el usuario autenticado
+            String token = jwtTokenUtil.generateToken(usuario);
+
+            return new AuthData(token, usuario);
         }
         return null;
     }
-
 }

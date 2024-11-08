@@ -19,7 +19,7 @@ type Query {
     usuarios: [Usuario!]!
     roles: [Rol!]!
     permisos: [Permiso!]!
-    checkAuthStatus: Usuario
+    checkAuthStatus: AuthData
     boletasInscripcion: [BoletaInscripcion!]!
     boletaInscripcionPorId(id: ID!): BoletaInscripcion
     cursos: [Curso!]!
