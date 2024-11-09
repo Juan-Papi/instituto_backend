@@ -2,11 +2,10 @@ package com.uagrm.instituto_backend.services;
 
 import com.uagrm.instituto_backend.entities.Horario;
 import com.uagrm.instituto_backend.repositories.HorarioRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +27,6 @@ public class HorarioService {
     }
 
     public Horario obtenerHorarioPorId(String id) {
-        return horarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Horario no encontrado"));
+        return horarioRepository.findById(new ObjectId(id)).orElseThrow(() -> new RuntimeException("Horario no encontrado"));
     }
 }

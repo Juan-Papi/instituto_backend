@@ -9,7 +9,6 @@ import com.uagrm.instituto_backend.repositories.UsuarioRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -26,7 +25,7 @@ public class CalificacionService {
 
     public Calificacion crearCalificacion(int nota, String estudianteId, String examenId) {
         Usuario estudiante = usuarioRepository.findById(new ObjectId(estudianteId)).orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
-        Examen examen = examenRepository.findById(examenId).orElseThrow(() -> new RuntimeException("Examen no encontrado"));
+        Examen examen = examenRepository.findById(new ObjectId(examenId)).orElseThrow(() -> new RuntimeException("Examen no encontrado"));
 
         Calificacion calificacion = new Calificacion();
         calificacion.nota = nota;
@@ -41,6 +40,6 @@ public class CalificacionService {
     }
 
     public Calificacion obtenerCalificacionPorId(String id) {
-        return calificacionRepository.findById(id).orElseThrow(() -> new RuntimeException("Calificación no encontrada"));
+        return calificacionRepository.findById(new ObjectId(id)).orElseThrow(() -> new RuntimeException("Calificación no encontrada"));
     }
 }

@@ -9,10 +9,8 @@ import com.uagrm.instituto_backend.repositories.UsuarioRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,7 +27,7 @@ public class AsistenciaService {
 
     public Asistencia crearAsistencia(String fecha, String horaInicio, String horaFinal, String docenteId, String cursoHorarioId) {
         Usuario docente = usuarioRepository.findById(new ObjectId(docenteId)).orElseThrow(() -> new RuntimeException("Docente no encontrado"));
-        CursoHorario cursoHorario = cursoHorarioRepository.findById(cursoHorarioId).orElseThrow(() -> new RuntimeException("CursoHorario no encontrado"));
+        CursoHorario cursoHorario = cursoHorarioRepository.findById(new ObjectId(cursoHorarioId)).orElseThrow(() -> new RuntimeException("CursoHorario no encontrado"));
 
         Asistencia asistencia = new Asistencia();
         asistencia.fecha = LocalDate.parse(fecha);
@@ -46,6 +44,6 @@ public class AsistenciaService {
     }
 
     public Asistencia obtenerAsistenciaPorId(String id) {
-        return asistenciaRepository.findById(id).orElseThrow(() -> new RuntimeException("Asistencia no encontrada"));
+        return asistenciaRepository.findById(new ObjectId(id)).orElseThrow(() -> new RuntimeException("Asistencia no encontrada"));
     }
 }

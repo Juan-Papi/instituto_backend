@@ -9,7 +9,6 @@ import com.uagrm.instituto_backend.repositories.UsuarioRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -25,7 +24,7 @@ public class DetalleCalificacionService {
     private UsuarioRepository usuarioRepository;
 
     public DetalleCalificacion crearDetalleCalificacion(float calificacion, String calificacionCursoId, String estudianteId) {
-        CalificacionCurso calificacionCurso = calificacionCursoRepository.findById(calificacionCursoId)
+        CalificacionCurso calificacionCurso = calificacionCursoRepository.findById(new ObjectId(calificacionCursoId))
                 .orElseThrow(() -> new RuntimeException("Calificación de curso no encontrada"));
         Usuario estudiante = usuarioRepository.findById(new ObjectId(estudianteId))
                 .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
@@ -43,7 +42,7 @@ public class DetalleCalificacionService {
     }
 
     public DetalleCalificacion obtenerDetalleCalificacionPorId(String id) {
-        return detalleCalificacionRepository.findById(id).orElseThrow(() -> new RuntimeException("Detalle de calificación no encontrado"));
+        return detalleCalificacionRepository.findById(new ObjectId(id)).orElseThrow(() -> new RuntimeException("Detalle de calificación no encontrado"));
     }
 }
 

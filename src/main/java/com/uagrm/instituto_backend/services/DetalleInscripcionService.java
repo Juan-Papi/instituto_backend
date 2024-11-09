@@ -27,7 +27,7 @@ public class DetalleInscripcionService {
     public DetalleInscripcion crearDetalleInscripcion(String boletaInscripcionId, String cursoId) {
         BoletaInscripcion boletaInscripcion = boletaInscripcionRepository.findById(new ObjectId(boletaInscripcionId))
                 .orElseThrow(() -> new RuntimeException("Boleta de inscripción no encontrada"));
-        Curso curso = cursoRepository.findById(cursoId)
+        Curso curso = cursoRepository.findById(new ObjectId(cursoId))
                 .orElseThrow(() -> new RuntimeException("Curso no encontrado"));
 
         DetalleInscripcion detalle = new DetalleInscripcion();
@@ -42,6 +42,6 @@ public class DetalleInscripcionService {
     }
 
     public DetalleInscripcion obtenerDetalleInscripcionPorId(String id) {
-        return detalleInscripcionRepository.findById(id).orElseThrow(() -> new RuntimeException("Detalle de inscripción no encontrado"));
+        return detalleInscripcionRepository.findById(new ObjectId(id)).orElseThrow(() -> new RuntimeException("Detalle de inscripción no encontrado"));
     }
 }

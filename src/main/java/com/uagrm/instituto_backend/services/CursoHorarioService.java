@@ -6,9 +6,9 @@ import com.uagrm.instituto_backend.entities.Horario;
 import com.uagrm.instituto_backend.repositories.CursoHorarioRepository;
 import com.uagrm.instituto_backend.repositories.CursoRepository;
 import com.uagrm.instituto_backend.repositories.HorarioRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -24,8 +24,8 @@ public class CursoHorarioService {
     private HorarioRepository horarioRepository;
 
     public CursoHorario crearCursoHorario(String cursoId, String horarioId) {
-        Curso curso = cursoRepository.findById(cursoId).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
-        Horario horario = horarioRepository.findById(horarioId).orElseThrow(() -> new RuntimeException("Horario no encontrado"));
+        Curso curso = cursoRepository.findById(new ObjectId(cursoId)).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+        Horario horario = horarioRepository.findById(new ObjectId(horarioId)).orElseThrow(() -> new RuntimeException("Horario no encontrado"));
 
         CursoHorario cursoHorario = new CursoHorario();
         cursoHorario.curso = curso;
@@ -39,6 +39,6 @@ public class CursoHorarioService {
     }
 
     public CursoHorario obtenerCursoHorarioPorId(String id) {
-        return cursoHorarioRepository.findById(id).orElseThrow(() -> new RuntimeException("CursoHorario no encontrado"));
+        return cursoHorarioRepository.findById(new ObjectId(id)).orElseThrow(() -> new RuntimeException("CursoHorario no encontrado"));
     }
 }

@@ -9,9 +9,7 @@ import com.uagrm.instituto_backend.repositories.UsuarioRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +25,7 @@ public class ExamenService {
     private UsuarioRepository usuarioRepository;
 
     public Examen crearExamen(String tema, String descripcion, String fecha, int ponderacion, String cursoId, String profesorId) {
-        Curso curso = cursoRepository.findById(cursoId).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+        Curso curso = cursoRepository.findById(new ObjectId(cursoId)).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
         Usuario profesor = usuarioRepository.findById(new ObjectId(profesorId)).orElseThrow(() -> new RuntimeException("Profesor no encontrado"));
 
         Examen examen = new Examen();
@@ -46,6 +44,6 @@ public class ExamenService {
     }
 
     public Examen obtenerExamenPorId(String id) {
-        return examenRepository.findById(id).orElseThrow(() -> new RuntimeException("Examen no encontrado"));
+        return examenRepository.findById(new ObjectId(id)).orElseThrow(() -> new RuntimeException("Examen no encontrado"));
     }
 }
